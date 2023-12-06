@@ -1,1 +1,3 @@
 <?php
+
+use Core\Router;

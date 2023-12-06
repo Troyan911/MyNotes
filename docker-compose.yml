@@ -17,7 +17,7 @@ services:
       context: .docker
     restart: always
     ports:
-      - "80:80"
+      - "81:80"
     volumes:
       - .:/var/www/html
     networks:

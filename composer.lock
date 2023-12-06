@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79c6cb63092fe72bdd7efed94496376d",
+    "content-hash": "9b366f631a4bd7f116fdaee7518c9731",
     "packages": [
         {
             "name": "larapack/dd",
@@ -288,7 +288,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-pdo": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
