@@ -14,7 +14,7 @@ services:
   noteapp:
     image: "php:8.1-apache"
     build:
-      context: config
+      context: .docker
     restart: always
     ports:
       - "80:80"
