@@ -4,9 +4,13 @@ RUN docker-php-ext-install -j$(nproc) pdo_mysql
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y git
 
+RUN apt-get update && apt-get install vim -y
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN /usr/sbin/a2enmod rewrite
+RUN sudo /usr/sbin/a2enmod rewrite
+
+#RUN sudo a2enmod rewrite
 
 RUN apt-get install -y libpq-dev
 

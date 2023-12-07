@@ -10,6 +10,7 @@ try {
 
     if(!preg_match("/assets/i", $_SERVER['REQUEST_URI'])) {
         Router::dispatch($_SERVER['REQUEST_URI']);
+        dd($_SERVER);
     }
 
 } catch (PDOException $exception) {
