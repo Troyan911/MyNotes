@@ -1,3 +1,3 @@
 <?php
 
-const CONFIG_DIR = BASE_DIR . "/Config";
+const CONFIG_DIR = BASE_DIR . "/config";
