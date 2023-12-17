@@ -34,12 +34,12 @@ class Router
             $action = static::getAction($controller);
 
             if ($controller->before($action, static::$params)) {
+//                dd($controller, $action, static::$params);
                 call_user_func_array([$controller, $action], static::$params);
-                dd($controller, $action);
                 $controller->after($action);
             }
         }
-        dd(static::$routes);
+//        dd(static::$routes);
     }
 
     protected static function getController(): Controller

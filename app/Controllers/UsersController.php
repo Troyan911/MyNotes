@@ -12,7 +12,12 @@ class UsersController extends Controller
 
     }
 
-    public function show()
+    public function show($id)
+    {
+
+    }
+
+    public function edit($id)
     {
 
     }
