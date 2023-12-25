@@ -13,4 +13,15 @@ abstract class Controller
         return true;
     }
 
+    protected function response(int $code = 200, array $body = [], array $errors = []): array
+    {
+//        return [
+//            'code' => $code,
+//            'data' => $body,
+//            'errors' => $errors
+//        ];
+
+        return compact('code', 'body', 'errors');
+    }
+
 }
