@@ -10,6 +10,9 @@ use \App\Models\Folder;
 use \App\Models\Note;
 
 try {
+    Folder::where('id', '=', 2);
+
+//    dd(User::select()->where('id', 3)->get());
 
 //    d(User::create([
 //        'email'=>'qwe4@i.ua',
@@ -33,14 +36,10 @@ try {
 //    }
 
 //    if (!preg_match("/assets/i", $_SERVER['REQUEST_URI'])) {
-        echo Router::dispatch($_SERVER['REQUEST_URI']);
-        exit;
+    echo Router::dispatch($_SERVER['REQUEST_URI']);
+    exit;
 //    }
 
 } catch (PDOException $exception) {
-    dd("PDOException", $exception->getMessage());
-} catch (Exception $exception) {
-    dd("Exception", $exception->getMessage());
+    errorResponse($exception);
 }
-
-phpinfo();

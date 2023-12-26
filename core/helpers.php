@@ -2,21 +2,22 @@
 
 use Core\Config;
 use Core\Db;
+use ReallySimpleJWT\Token;
 
-function requestBody() : array {
-     $data = [];
+function requestBody(): array
+{
+    $data = [];
 
-     $requestBody = file_get_contents("php://input");
+    $requestBody = file_get_contents("php://input");
 
-     if(!empty($requestBody)) {
-         $data = json_decode($requestBody, true);
-     }
-     return $data;
+    if (!empty($requestBody)) {
+        $data = json_decode($requestBody, true);
+    }
+    return $data;
 }
 
 function json_response(int $code = 200, array $data = []): string
 {
-
     header_remove();
     http_response_code($code);
     header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
@@ -40,6 +41,14 @@ function json_response(int $code = 200, array $data = []): string
 
 }
 
+function errorResponse(Exception $exception): void
+{
+    die(json_response(422, [
+        'data' => ['message' => $exception->getMessage()],
+        'errors' => $exception->getTrace()
+    ]));
+}
+
 function config(string $name): string|null
 {
     return Config::get($name);
@@ -48,4 +57,27 @@ function config(string $name): string|null
 function db(): PDO
 {
     return Db::connect();
+}
+
+
+function getToken(): string
+{
+    $headers = apache_request_headers();
+
+    if (empty($headers['Authorization'])) {
+        throw new \Exception('The request should contain an auth token', 403);
+    }
+
+    return str_replace("Bearer ", "", $headers['Authorization']);
+}
+
+function authId(): int
+{
+    $tokenData = Token::getPayload(getToken());
+
+    if (empty($tokenData['user_id'])) {
+        throw new \Exception('Token data is invalid', 403);
+    }
+
+    return $tokenData['user_id'];
 }

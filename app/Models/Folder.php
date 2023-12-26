@@ -8,8 +8,8 @@ class Folder extends Model
 {
     protected static string|null $tableName = 'folders';
 
-    public int|null $user_id;
-    public string|null $title, $created_at, $updated_at;
+    public int $user_id;
+    public string $title, $created_at, $updated_at;
 
     public function getInfo(): array
     {

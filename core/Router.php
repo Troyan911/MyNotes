@@ -40,6 +40,7 @@ class Router
                 $controller->after($action);
             }
         }
+
         return json_response($response['code'], [
             'data'=>$response['body'],
             'errors'=>$response['errors'],

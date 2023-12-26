@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Api;
 
 use App\Models\User;
 use App\Validators\Auth\AuthValidator;
 use App\Validators\Auth\RegisterValidator;
 use Core\Controller;
+use ReallySimpleJWT\Token;
+
 
 class AuthController extends Controller
 {
-
     public function signup(): array
     {
         $data = requestBody();
@@ -20,7 +21,6 @@ class AuthController extends Controller
                 ...$data,
                 'password' => password_hash($data['password'], PASSWORD_BCRYPT)
             ]);
-
 
             return $this->response(
                 200,
@@ -40,29 +40,17 @@ class AuthController extends Controller
         $data = requestBody();
         $validator = new AuthValidator();
 
-        if($validator->validate($data)) {
+        if ($validator->validate($data)) {
             $user = User::findBy('email', $data['email']);
 
-            if(password_verify($data['password'], $user->password)) {
-                $token = random_bytes(32);
-                return $this->response(200, compact($token));
+            if (password_verify($data['password'], $user->password)) {
+                $expiration = time() + 3600;
+                $token = Token::create($user->id, $user->password, $expiration, 'localhost');
+
+                return $this->response(200, compact('token'));
             }
         }
-
         return $this->response(200, [], $validator->getErrors());
-
-
-
-    }
-
-    public function show($id)
-    {
-
-    }
-
-    public function edit($id)
-    {
-
     }
 
     public function before2(string $action, array $params = []): bool
