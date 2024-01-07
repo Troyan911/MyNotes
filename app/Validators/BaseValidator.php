@@ -23,7 +23,8 @@ class BaseValidator
         return $this->errors;
     }
 
-    public function setErrors(string $key, string $message):void {
+    public function setError(string $key, string $message):void {
         $this->errors[$key] = $message;
     }
+
 }

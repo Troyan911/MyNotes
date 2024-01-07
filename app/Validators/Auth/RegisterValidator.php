@@ -2,16 +2,16 @@
 
 namespace App\Validators\Auth;
 
-use App\Validators\BaseValidator;
-
 class RegisterValidator extends BaseAuthValidator
 {
-
-    const DEFAULT_MESSAGE = "Email or password is incorrect";
+    protected array $rules = [
+        'email' => '/^[a-zA-Z0-9.!#$%&\'*+\/\?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i',
+        'password' => '/[a-zA-Z0-9.!#$%&\'*+\/\?^_`{|}~-]{8,}/',
+    ];
 
     protected array $errors = [
-        'email' => "Email is incorrect",
-        'password' => "Password is incorrect. Min length 8 symbols"
+        'email' => 'Email is incorrect',
+        'password' => 'Password is incorrect. Minimum length 8 symbols'
     ];
 
     public function validate(array $fields = []): bool
