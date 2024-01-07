@@ -8,6 +8,9 @@ CREATE TABLE IF NOT EXISTS notes (
     pinned BOOL DEFAULT false,
     completed BOOL DEFAULT false,
 
+    created_at DATETIME DEFAULT NOW(),
+    updated_at DATETIME DEFAULT NOW(),
+
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (folder_id) REFERENCES folders(id)
 );

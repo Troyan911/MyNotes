@@ -167,7 +167,7 @@ trait Queryable
 
     public function andWhere(string $column, string $operator, $value = null): static
     {
-        static::$query .= " AND";
+        static::$query .= " AND" . (in_array('startCondition', $this->commands) ? ' (' : '');
         return $this->where($column, $operator, $value);
     }
 

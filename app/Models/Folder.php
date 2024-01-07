@@ -17,5 +17,4 @@ class Folder extends Model
             'title' => $this->title
         ];
     }
-
 }

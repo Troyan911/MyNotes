@@ -18,7 +18,7 @@ class BaseAuthValidator extends BaseValidator
         $result = (bool)User::findBy('email', $email);
 
         if ($result === $eq) {
-            $this->setErrors('email', $message);
+            $this->setError('email', $message);
         }
 
         return $result;
