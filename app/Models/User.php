@@ -10,7 +10,7 @@ class User extends Model
 //    change name from User to users via regexp
     protected static string|null $tableName = 'users';
 
-    public string|null $email, $password, $token, $token_expired_at = null, $created_at;
+    public string | null $email, $password, $token, $created_at, $token_expired_at = null;
 
     public function getUserInfo(): array
     {

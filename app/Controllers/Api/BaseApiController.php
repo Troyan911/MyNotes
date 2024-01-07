@@ -19,6 +19,4 @@ class BaseApiController extends Controller
 
         return true;
     }
-
-
 }
